@@ -5,7 +5,16 @@ import entity.Interfaces.IPrinter;
 
 public class ConsolePrinter implements IPrinter {
 
+    private boolean showBorder = true;
+    public ConsolePrinter(boolean showBorder){
+        this.showBorder = showBorder;
+    }
+
     public void DrawBorder(IMatrix matrix) {
+        if (!showBorder) {
+            return;
+        }
+
         for (int i = 0; i < matrix.getRowsAmount(); i++) {
             for (int count = 0; count < matrix.getColumnsAmount(); count++) {
                 System.out.print("|```|");

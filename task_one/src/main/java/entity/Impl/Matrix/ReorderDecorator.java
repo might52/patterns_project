@@ -5,9 +5,11 @@ import entity.Interfaces.IPrinter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
-public class ReorderDecorator implements IMatrix {
+public class ReorderDecorator implements IMatrix, IPrinter {
     private final IMatrix matrix;
 
     private String shakedRow = "shakedRow";
@@ -21,8 +23,8 @@ public class ReorderDecorator implements IMatrix {
         shaker.add(shakedCol);
         Collections.shuffle(shaker);
         isRow = true;
-//        isRow = shaker.get(0).equals(shakedRow);
-//        System.out.println(isRow);
+        isRow = shaker.get(0).equals(shakedRow);
+        System.out.println(isRow);
     }
 
     public ReorderDecorator(IMatrix matrix) {
@@ -63,19 +65,27 @@ public class ReorderDecorator implements IMatrix {
         matrix.setValue(row, col, value);
     }
 
-    public void print(IPrinter printer, boolean showBorder){
-        if (showBorder){
-            printer.DrawBorder(this);
-        }
+    //FIXME: remove this code
+    public void print(IPrinter printer){
+        matrix.print(this);
+    }
 
-        for (int i = 0; i < this.getRowsAmount(); i++) {
-            for (int j = 0; j < this.getColumnsAmount(); j++) {
-                printer.DrawBorderCell(this, i, j);
-                printer.DrawValue(this, i, j, getValue(i, j));
-            }
-        }
+    //FIXME: remove this code
+    @Override
+    public void DrawBorder(IMatrix matrix) {
+        System.out.println("Decorator draw DrawBorder");
+    }
 
-        System.out.println();
+    //FIXME: remove this code
+    @Override
+    public void DrawBorderCell(IMatrix matrix, int row, int col) {
+        System.out.println("Decorator draw DrawBorderCell");
+    }
+
+    //FIXME: remove this code
+    @Override
+    public void DrawValue(IMatrix matrix, int row, int col, double val) {
+        System.out.println("Decorator DrawValue");
     }
 
 

@@ -5,5 +5,5 @@ public interface IMatrix {
     int getColumnsAmount();
     double getValue(int row, int col);
     void setValue(int row, int col, double value);
-    void print(IPrinter printer, boolean showBorder);
+    void print(IPrinter printer);
 }

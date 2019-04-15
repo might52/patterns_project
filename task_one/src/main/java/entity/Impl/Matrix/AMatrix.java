@@ -4,12 +4,19 @@ import entity.Interfaces.IPrinter;
 import entity.Interfaces.IMatrix;
 import entity.Interfaces.IVector;
 
+import java.util.Enumeration;
+// import java.util.function.Supplier;
+
 public abstract class AMatrix implements IMatrix {
 
     private int rows;
     private int columns;
 
     private final IVector vector;
+
+    public Enumeration<IMatrix> matrixEnumeration (IMatrix matrix){
+        return null;
+    }
 
     protected AMatrix(IVector vector, int rows, int columns) {
         this.vector = vector;
@@ -46,5 +53,5 @@ public abstract class AMatrix implements IMatrix {
         return sb.toString();
     }
 
-    public abstract void print(IPrinter printer, boolean showBorder);
+    public abstract void print(IPrinter printer);
 }

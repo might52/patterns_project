@@ -10,10 +10,8 @@ public class ThinMatrix extends AMatrix {
         super(new ThinVector(), rows, columns);
     }
 
-    public void print(IPrinter printer, boolean showBorder) {
-        if (showBorder){
-            printer.DrawBorder(this);
-        }
+    public void print(IPrinter printer) {
+        printer.DrawBorder(this);
 
         for (int i = 0; i < getRowsAmount(); i++) {
             for (int j = 0; j < getColumnsAmount(); j++) {
