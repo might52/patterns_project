@@ -15,21 +15,7 @@ public class ReorderDecorator implements IMatrix {
     private String shakedRow = "shakedRow";
     private String shakedCol = "shakedCol";
 
-    private IMatrixFunction iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
-        public void doAction(IPrinter printer, IMatrix matrix) {
-            printer.DrawBorder(matrix);
-            for (int i = 0; i < matrix.getRowsAmount(); i++) {
-                for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-                        if (matrix.getValue(i, j) == 0) {
-                            continue;
-                        }
-
-                    printer.DrawBorderCell(matrix, i, j);
-                    printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
-                }
-            }
-        }
-    };
+    private IMatrixFunction iMatrixFunction;
 
     private boolean isRow = true;
 
@@ -46,6 +32,21 @@ public class ReorderDecorator implements IMatrix {
     public ReorderDecorator(IMatrix matrix) {
         this.matrix = matrix;
         shuffleValues();
+        this.iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
+            public void doAction(IPrinter printer, IMatrix matrix) {
+                printer.DrawBorder(matrix);
+                for (int i = 0; i < matrix.getRowsAmount(); i++) {
+                    for (int j = 0; j < matrix.getColumnsAmount(); j++) {
+                        if (matrix.getValue(i, j) == 0) {
+                            continue;
+                        }
+
+                        printer.DrawBorderCell(matrix, i, j);
+                        printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
+                    }
+                }
+            }
+        };
     }
 
     public int getRowsAmount() {
