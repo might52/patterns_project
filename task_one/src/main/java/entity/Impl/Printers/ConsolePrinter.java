@@ -6,6 +6,7 @@ import entity.Interfaces.IPrinter;
 public class ConsolePrinter implements IPrinter {
 
     private boolean showBorder = true;
+
     public ConsolePrinter(boolean showBorder){
         this.showBorder = showBorder;
     }
@@ -36,6 +37,7 @@ public class ConsolePrinter implements IPrinter {
         for (int i = 0; i < col; i++) {
             tabs.append("\t");
         }
+
         System.out.println(tabs + "|```|");
         System.out.print(tabs + "|,,,|");
     }
@@ -57,4 +59,5 @@ public class ConsolePrinter implements IPrinter {
 
         System.out.print(stringBuilder);
     }
+
 }

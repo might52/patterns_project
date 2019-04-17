@@ -4,14 +4,20 @@ import entity.Impl.Matrix.ReorderDecorator;
 import entity.Impl.Matrix.ThinMatrix;
 import entity.Impl.Matrix.UsualMatrix;
 import entity.Impl.Printers.ConsolePrinter;
-import entity.Impl.Printers.HTMLPrinter;
 import entity.Interfaces.IMatrix;
 
 public class Application {
 
     public static void main(String[] args) {
 
-        /*IMatrix usualMatrix = new UsualMatrix(2,3);
+        // first and second tasks
+//        firstSecondThirdTasks();
+        //test Reorder
+        thirdTask();
+    }
+
+    private static void firstSecondThirdTasks(){
+        IMatrix usualMatrix = new UsualMatrix(2,3);
         IMatrix thinMatrix = new ThinMatrix(2,3);
 
         InitMatrix.fillMatrix(usualMatrix, 3,6);
@@ -45,8 +51,10 @@ public class Application {
 
         usualMatrix = ownMatrix;
         System.out.println(String.format("Using previous matrix = %s", usualMatrix.getClass().getName()));
-        usualMatrix.print(new ConsolePrinter( true));*/
+        usualMatrix.print(new ConsolePrinter( true));
+    }
 
+    private static void thirdTask(){
         IMatrix thinMatrix = new ThinMatrix(2,3);
         InitMatrix.fillMatrix(thinMatrix, 3,6);
         System.out.println(String.format("Using matrix = %s", thinMatrix.getClass().getName()));
@@ -54,13 +62,10 @@ public class Application {
 
         IMatrix reordered = new ReorderDecorator(thinMatrix);
         System.out.println(String.format("Using matrix = %s", reordered.getClass().getName()));
-        reordered.print(new ConsolePrinter(false));
+        reordered.print(new ConsolePrinter(true));
 
         System.out.println(String.format("Using previous matrix = %s", thinMatrix.getClass().getName()));
-        thinMatrix.print(new ConsolePrinter(false));
-
-
-
+        thinMatrix.print(new ConsolePrinter(true));
     }
 
 }

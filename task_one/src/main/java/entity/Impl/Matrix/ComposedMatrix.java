@@ -1,6 +1,5 @@
 package entity.Impl.Matrix;
 
-import entity.Impl.Printers.ConsolePrinter;
 import entity.Interfaces.IMatrix;
 import entity.Interfaces.IPrinter;
 
@@ -60,8 +59,7 @@ public class ComposedMatrix implements IMatrix {
 
     @Override
     public void print(IPrinter printer) {
-        this.matrixes.forEach(matrix -> matrix.print(new ConsolePrinter(true)));
-    }
 
+    }
 
 }

@@ -1,19 +1,35 @@
 package entity.Impl.Matrix;
 
 import entity.Interfaces.IMatrix;
+import entity.Interfaces.IMatrixFunction;
 import entity.Interfaces.IPrinter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 
-public class ReorderDecorator implements IMatrix, IPrinter {
+
+public class ReorderDecorator implements IMatrix {
     private final IMatrix matrix;
 
     private String shakedRow = "shakedRow";
     private String shakedCol = "shakedCol";
+
+    private IMatrixFunction iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
+        public void doAction(IPrinter printer, IMatrix matrix) {
+            printer.DrawBorder(matrix);
+            for (int i = 0; i < matrix.getRowsAmount(); i++) {
+                for (int j = 0; j < matrix.getColumnsAmount(); j++) {
+                        if (matrix.getValue(i, j) == 0) {
+                            continue;
+                        }
+
+                    printer.DrawBorderCell(matrix, i, j);
+                    printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
+                }
+            }
+        }
+    };
 
     private boolean isRow = true;
 
@@ -23,7 +39,7 @@ public class ReorderDecorator implements IMatrix, IPrinter {
         shaker.add(shakedCol);
         Collections.shuffle(shaker);
         isRow = true;
-        isRow = shaker.get(0).equals(shakedRow);
+//        isRow = shaker.get(0).equals(shakedRow);
         System.out.println(isRow);
     }
 
@@ -65,28 +81,8 @@ public class ReorderDecorator implements IMatrix, IPrinter {
         matrix.setValue(row, col, value);
     }
 
-    //FIXME: remove this code
-    public void print(IPrinter printer){
-        matrix.print(this);
-    }
-
-    //FIXME: remove this code
     @Override
-    public void DrawBorder(IMatrix matrix) {
-        System.out.println("Decorator draw DrawBorder");
+    public void print(IPrinter printer) {
+        this.iMatrixFunction.doAction(printer, this);
     }
-
-    //FIXME: remove this code
-    @Override
-    public void DrawBorderCell(IMatrix matrix, int row, int col) {
-        System.out.println("Decorator draw DrawBorderCell");
-    }
-
-    //FIXME: remove this code
-    @Override
-    public void DrawValue(IMatrix matrix, int row, int col, double val) {
-        System.out.println("Decorator DrawValue");
-    }
-
-
 }

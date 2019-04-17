@@ -6,11 +6,12 @@ import entity.Interfaces.IPrinter;
 public class HTMLPrinter implements IPrinter {
 
     private boolean showBorder = true;
+
     public HTMLPrinter(boolean showBorder){
         this.showBorder = showBorder;
     }
 
-    public void DrawBorder(IMatrix matrix) {
+   public void DrawBorder(IMatrix matrix) {
         System.out.println(String.format("Painting the border for matrix %s in html", matrix.getClass().getName()));
     }
 

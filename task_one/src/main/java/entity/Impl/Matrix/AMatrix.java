@@ -1,11 +1,9 @@
 package entity.Impl.Matrix;
 
+import entity.Interfaces.IMatrixFunction;
 import entity.Interfaces.IPrinter;
 import entity.Interfaces.IMatrix;
 import entity.Interfaces.IVector;
-
-import java.util.Enumeration;
-// import java.util.function.Supplier;
 
 public abstract class AMatrix implements IMatrix {
 
@@ -14,9 +12,20 @@ public abstract class AMatrix implements IMatrix {
 
     private final IVector vector;
 
-    public Enumeration<IMatrix> matrixEnumeration (IMatrix matrix){
-        return null;
-    }
+    public IMatrixFunction<IPrinter, IMatrix> iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
+        public void doAction(IPrinter printer, IMatrix matrix) {
+            printer.DrawBorder(matrix);
+
+            for (int i = 0; i < getRowsAmount(); i++) {
+                for (int j = 0; j < getColumnsAmount(); j++) {
+                    printer.DrawBorderCell(matrix, i, j);
+                    printer.DrawValue(matrix, i, j, getValue(i, j));
+                }
+            }
+
+            System.out.println();
+        }
+    };
 
     protected AMatrix(IVector vector, int rows, int columns) {
         this.vector = vector;
@@ -53,5 +62,8 @@ public abstract class AMatrix implements IMatrix {
         return sb.toString();
     }
 
-    public abstract void print(IPrinter printer);
+    public void print(IPrinter printer){
+        iMatrixFunction.doAction(printer, this);
+    }
+
 }

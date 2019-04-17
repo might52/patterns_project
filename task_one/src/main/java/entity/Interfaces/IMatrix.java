@@ -6,4 +6,5 @@ public interface IMatrix {
     double getValue(int row, int col);
     void setValue(int row, int col, double value);
     void print(IPrinter printer);
+
 }
