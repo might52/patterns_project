@@ -50,4 +50,12 @@ public class MatrixStats {
 
         return notNull;
     }
+
+    public void printStats(){
+        System.out.println(String.format("Summ %s", this.getSumm()));
+        System.out.println(String.format("Averege %s", this.getAverage()));
+        System.out.println(String.format("Maximum %s", this.getMaxValue()));
+        System.out.println(String.format("NotNull %s", this.getNotNullAmount()));
+        System.out.println();
+    }
 }
