@@ -10,6 +10,9 @@ public class UsualVector implements IVector {
 
     public void setComponent(int component, double value) {
         this.someVector.add(component, value);
+        if (this.someVector.size() -1  > component) {
+            this.someVector.remove(component + 1);
+        }
     }
 
     public double getComponent(int component) {
