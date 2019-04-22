@@ -12,6 +12,10 @@ public class HorizontalGroupMatrix implements IMatrix {
 
     private final List<IMatrix> matrixes = new ArrayList<IMatrix>();
 
+    public List<IMatrix> getMatrixes() {
+        return matrixes;
+    }
+
     private final IMatrixFunction iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
         public void doAction(IPrinter printer, IMatrix matrix) {
             printer.DrawBorder(matrix);

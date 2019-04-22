@@ -1,9 +1,6 @@
 package entity;
 
-import entity.Impl.Matrix.HorizontalGroupMatrix;
-import entity.Impl.Matrix.ReorderDecorator;
-import entity.Impl.Matrix.ThinMatrix;
-import entity.Impl.Matrix.UsualMatrix;
+import entity.Impl.Matrix.*;
 import entity.Impl.Printers.ConsolePrinter;
 import entity.Interfaces.IMatrix;
 
@@ -18,6 +15,7 @@ public class Application {
         //test Reorder
 //        thirdTask();
         fourthTask();
+        fourthTaskLast();
     }
 
     private static void firstSecondThirdTasks(){
@@ -66,34 +64,89 @@ public class Application {
         IMatrix thinMatrix = new ThinMatrix(2,2);
         InitMatrix.fillMatrix(thinMatrix, 4,1);
         IMatrix usualMatrix1 = new UsualMatrix(2,2);
-        InitMatrix.fillMatrix(usualMatrix1, 4,2);
-//        IMatrix usualMatrix2 = new UsualMatrix(3,1);
-//        InitMatrix.fillMatrix(usualMatrix2, 3,3);
-//        IMatrix usualMatrix3 = new UsualMatrix(3,1);
-//        InitMatrix.fillMatrix(usualMatrix3, 3,4);
+        InitMatrix.fillMatrix(usualMatrix1, 2,2);
+        IMatrix usualMatrix2 = new UsualMatrix(3,1);
+        InitMatrix.fillMatrix(usualMatrix2, 3,3);
 
-        setValue(thinMatrix, 1);
-        setValue(usualMatrix1, 2);
+//        setValue(thinMatrix, 1);
+//        setValue(usualMatrix1, 2);
 //        setValue(usualMatrix2, 3);
-//        setValue(usualMatrix3, 1.0);
 
         HorizontalGroupMatrix horizontalGroupMatrix = new HorizontalGroupMatrix(
                 Arrays.asList(
                         thinMatrix,
-                        usualMatrix1
-//                        usualMatrix2
+                        usualMatrix1,
+                        usualMatrix2
                 )
         );
 
-//        MatrixStats statHorizontalGroupMatrix = new MatrixStats(horizontalGroupMatrix);
-//        statHorizontalGroupMatrix.printStats();
+        MatrixStats statHorizontalGroupMatrix = new MatrixStats(horizontalGroupMatrix);
+        statHorizontalGroupMatrix.printStats();
 
         horizontalGroupMatrix.print(new ConsolePrinter(true));
         horizontalGroupMatrix.setValue(1,0, 4);
         horizontalGroupMatrix.setValue(1,1, 4);
         horizontalGroupMatrix.setValue(1,2, 4);
         horizontalGroupMatrix.setValue(1,3, 4);
+        horizontalGroupMatrix.setValue(1,4, 4);
+        horizontalGroupMatrix.setValue(1,5, 4);
         horizontalGroupMatrix.print(new ConsolePrinter(true));
+
+        ReorderDecorator reorderDecorator = new ReorderDecorator(horizontalGroupMatrix);
+        System.out.println(String.format("Reorder for horizontal: %s", horizontalGroupMatrix.getClass().getCanonicalName()));
+        reorderDecorator.print(new ConsolePrinter(true));
+    }
+
+    private static void fourthTaskLast(){
+        IMatrix thinMatrix1 = new ThinMatrix(2,2);
+        InitMatrix.fillMatrix(thinMatrix1, 4,1);
+        IMatrix usualMatrix1 = new UsualMatrix(4,3);
+        InitMatrix.fillMatrix(usualMatrix1, 12,2);
+        IMatrix usualMatrix2 = new UsualMatrix(1,3);
+        InitMatrix.fillMatrix(usualMatrix2, 3,3);
+        setValue(thinMatrix1, 1);
+        setValue(usualMatrix1, 2);
+        setValue(usualMatrix2, 3);
+        HorizontalGroupMatrix horizontalGroupMatrix1 = new HorizontalGroupMatrix(
+                Arrays.asList(
+                        thinMatrix1,
+                        usualMatrix1,
+                        usualMatrix2
+                )
+        );
+        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix1"));
+        horizontalGroupMatrix1.print(new ConsolePrinter(true));
+
+        IMatrix usualMatrix3 = new UsualMatrix(2, 4);
+        InitMatrix.fillMatrix(usualMatrix3, 8, 4);
+        IMatrix usualMatrix4 = new UsualMatrix(2, 3);
+        InitMatrix.fillMatrix(usualMatrix4, 6, 5);
+        setValue(usualMatrix3, 4);
+        setValue(usualMatrix4, 5);
+        HorizontalGroupMatrix horizontalGroupMatrix2 = new HorizontalGroupMatrix(
+                Arrays.asList(
+                        usualMatrix3,
+                        usualMatrix4
+                )
+        );
+        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix2"));
+        horizontalGroupMatrix2.print(new ConsolePrinter(true));
+
+        IMatrix usualMatrix5 = new UsualMatrix(1,1);
+        InitMatrix.fillMatrix(usualMatrix5, 1, 6);
+        setValue(usualMatrix5, 6);
+
+        HorizontalGroupMatrix horizontalGroupMatrix = new HorizontalGroupMatrix(Arrays.asList(horizontalGroupMatrix1, horizontalGroupMatrix2, usualMatrix5));
+        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix"));
+        horizontalGroupMatrix.print(new ConsolePrinter(true));
+
+        ReorderDecorator reorderDecorator = new ReorderDecorator(horizontalGroupMatrix);
+        System.out.println(String.format("Using matrix = %s", "reorderDecorator"));
+        reorderDecorator.print(new ConsolePrinter(true));
+
+        GroupVerticalDecorator groupVerticalDecorator = new GroupVerticalDecorator(horizontalGroupMatrix);
+        System.out.println(String.format("Using matrix = %s", "groupVerticalDecorator"));
+        groupVerticalDecorator.print(new ConsolePrinter(true));
     }
 }
 

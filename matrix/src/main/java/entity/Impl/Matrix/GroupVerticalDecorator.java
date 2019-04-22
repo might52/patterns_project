@@ -4,34 +4,27 @@ import entity.Interfaces.IMatrix;
 import entity.Interfaces.IMatrixFunction;
 import entity.Interfaces.IPrinter;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
-public class ReorderDecorator implements IMatrix {
+public class GroupVerticalDecorator implements IMatrix {
     private final IMatrix matrix;
-
-    private String shakedRow = "shakedRow";
-    private String shakedCol = "shakedCol";
 
     private IMatrixFunction iMatrixFunction;
 
+    private List<IMatrix> matrices = new ArrayList<>();
+
     private boolean isRow = true;
 
-    private void shuffleValues(){
-        List<String> shaker = new ArrayList();
-        shaker.add(shakedRow);
-        shaker.add(shakedCol);
-        Collections.shuffle(shaker);
-        isRow = true;
-//        isRow = shaker.get(0).equals(shakedRow);
-//        System.out.println(isRow);
-    }
-
-    public ReorderDecorator(IMatrix matrix) {
+    public GroupVerticalDecorator(IMatrix matrix) {
         this.matrix = matrix;
-        shuffleValues();
+        if (matrix instanceof HorizontalGroupMatrix) {
+            this.matrices = ((HorizontalGroupMatrix) matrix).getMatrixes();
+        }
+
         this.iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
             public void doAction(IPrinter printer, IMatrix matrix) {
                 printer.DrawBorder(matrix);
@@ -84,6 +77,12 @@ public class ReorderDecorator implements IMatrix {
 
     @Override
     public void print(IPrinter printer) {
-        this.iMatrixFunction.doAction(printer, this);
+        if (Collections.EMPTY_LIST == this.matrices){
+            this.iMatrixFunction.doAction(printer, this);
+        } else {
+            for (IMatrix matrix : this.matrices) {
+                this.iMatrixFunction.doAction(printer, matrix);
+            }
+        }
     }
 }
