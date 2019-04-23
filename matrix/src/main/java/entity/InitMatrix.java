@@ -10,7 +10,7 @@ public class InitMatrix {
 
     private static final Random random = new Random();
 
-    public static void fillMatrix(IMatrix matrix, int notNullAmount, double MaxValue){
+    public static void fillMatrix(IMatrix matrix, int notNullAmount, double MaxValue) {
         int notNullEncounter = 0;
         double minValue = -MaxValue;
         for (int i = 0; i < matrix.getRowsAmount(); i++) {

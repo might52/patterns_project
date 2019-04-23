@@ -9,12 +9,11 @@ import java.util.Arrays;
 public class Application {
 
     public static void main(String[] args) {
-
         // first and second tasks
 //        firstSecondThirdTasks();
         //test Reorder
 //        thirdTask();
-        fourthTask();
+//        fourthTask();
         fourthTaskLast();
     }
 
@@ -42,7 +41,7 @@ public class Application {
         IMatrix thinMatrix = new ThinMatrix(2,3);
         InitMatrix.fillMatrix(thinMatrix, 3,6);
         System.out.println(String.format("Using matrix = %s", thinMatrix.getClass().getName()));
-        thinMatrix.print(new ConsolePrinter(true));
+        thinMatrix.print(new ConsolePrinter(true, " "));
 
         IMatrix reordered = new ReorderDecorator(thinMatrix);
         System.out.println(String.format("Using matrix = %s", reordered.getClass().getName()));
@@ -62,15 +61,11 @@ public class Application {
 
     private static void fourthTask() {
         IMatrix thinMatrix = new ThinMatrix(2,2);
-        InitMatrix.fillMatrix(thinMatrix, 4,1);
+        InitMatrix.fillMatrix(thinMatrix, 2,1);
         IMatrix usualMatrix1 = new UsualMatrix(2,2);
         InitMatrix.fillMatrix(usualMatrix1, 2,2);
         IMatrix usualMatrix2 = new UsualMatrix(3,1);
         InitMatrix.fillMatrix(usualMatrix2, 3,3);
-
-//        setValue(thinMatrix, 1);
-//        setValue(usualMatrix1, 2);
-//        setValue(usualMatrix2, 3);
 
         HorizontalGroupMatrix horizontalGroupMatrix = new HorizontalGroupMatrix(
                 Arrays.asList(
@@ -84,14 +79,6 @@ public class Application {
         statHorizontalGroupMatrix.printStats();
 
         horizontalGroupMatrix.print(new ConsolePrinter(true));
-        horizontalGroupMatrix.setValue(1,0, 4);
-        horizontalGroupMatrix.setValue(1,1, 4);
-        horizontalGroupMatrix.setValue(1,2, 4);
-        horizontalGroupMatrix.setValue(1,3, 4);
-        horizontalGroupMatrix.setValue(1,4, 4);
-        horizontalGroupMatrix.setValue(1,5, 4);
-        horizontalGroupMatrix.print(new ConsolePrinter(true));
-
         ReorderDecorator reorderDecorator = new ReorderDecorator(horizontalGroupMatrix);
         System.out.println(String.format("Reorder for horizontal: %s", horizontalGroupMatrix.getClass().getCanonicalName()));
         reorderDecorator.print(new ConsolePrinter(true));
@@ -114,8 +101,9 @@ public class Application {
                         usualMatrix2
                 )
         );
+
         System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix1"));
-        horizontalGroupMatrix1.print(new ConsolePrinter(true));
+        horizontalGroupMatrix1.print(new ConsolePrinter());
 
         IMatrix usualMatrix3 = new UsualMatrix(2, 4);
         InitMatrix.fillMatrix(usualMatrix3, 8, 4);
@@ -130,7 +118,7 @@ public class Application {
                 )
         );
         System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix2"));
-        horizontalGroupMatrix2.print(new ConsolePrinter(true));
+        horizontalGroupMatrix2.print(new ConsolePrinter());
 
         IMatrix usualMatrix5 = new UsualMatrix(1,1);
         InitMatrix.fillMatrix(usualMatrix5, 1, 6);
@@ -138,15 +126,11 @@ public class Application {
 
         HorizontalGroupMatrix horizontalGroupMatrix = new HorizontalGroupMatrix(Arrays.asList(horizontalGroupMatrix1, horizontalGroupMatrix2, usualMatrix5));
         System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix"));
-        horizontalGroupMatrix.print(new ConsolePrinter(true));
-
-        ReorderDecorator reorderDecorator = new ReorderDecorator(horizontalGroupMatrix);
-        System.out.println(String.format("Using matrix = %s", "reorderDecorator"));
-        reorderDecorator.print(new ConsolePrinter(true));
+        horizontalGroupMatrix.print(new ConsolePrinter());
 
         GroupVerticalDecorator groupVerticalDecorator = new GroupVerticalDecorator(horizontalGroupMatrix);
         System.out.println(String.format("Using matrix = %s", "groupVerticalDecorator"));
-        groupVerticalDecorator.print(new ConsolePrinter(true));
+        groupVerticalDecorator.print(new ConsolePrinter());
     }
 }
 

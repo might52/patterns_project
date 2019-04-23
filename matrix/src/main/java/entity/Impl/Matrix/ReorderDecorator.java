@@ -25,8 +25,6 @@ public class ReorderDecorator implements IMatrix {
         shaker.add(shakedCol);
         Collections.shuffle(shaker);
         isRow = true;
-//        isRow = shaker.get(0).equals(shakedRow);
-//        System.out.println(isRow);
     }
 
     public ReorderDecorator(IMatrix matrix) {
@@ -37,13 +35,12 @@ public class ReorderDecorator implements IMatrix {
                 printer.DrawBorder(matrix);
                 for (int i = 0; i < matrix.getRowsAmount(); i++) {
                     for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-//                        if (matrix.getValue(i, j) == 0) {
-//                            continue;
-//                        }
-
-                        printer.DrawBorderCell(matrix, i, j);
+                        if (matrix.getValue(i, j) == 0){
+                            continue;
+                        }
                         printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
                     }
+                    printer.DrawEmptyRow();
                 }
             }
         };

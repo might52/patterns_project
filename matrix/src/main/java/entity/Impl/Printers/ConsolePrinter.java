@@ -5,9 +5,17 @@ import entity.Interfaces.IPrinter;
 
 public class ConsolePrinter implements IPrinter {
 
-    private boolean showBorder = true;
+    private boolean showBorder;
+
+    public ConsolePrinter(){
+        this.showBorder = false;
+    }
 
     public ConsolePrinter(boolean showBorder){
+        this.showBorder = showBorder;
+    }
+
+    public ConsolePrinter(boolean showBorder, String symbol){
         this.showBorder = showBorder;
     }
 
@@ -32,32 +40,18 @@ public class ConsolePrinter implements IPrinter {
         System.out.println();
     }
 
-    public void DrawBorderCell(IMatrix matrix, int row, int col) {
-        StringBuilder tabs = new StringBuilder("");
-        for (int i = 0; i < col; i++) {
-            tabs.append("\t");
-        }
-
-        System.out.println(tabs + "|```|");
-        System.out.print(tabs + "|,,,|");
+    @Override
+    public void DrawEmptyRow() {
+        System.out.println();
     }
 
     public void DrawValue(IMatrix matrix, int row, int col, double val) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < matrix.getRowsAmount(); i++) {
-            for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-                if (row == i && col == j) {
-                    stringBuilder.append(String.format(" %.2f \n", val));
-                }
-//                else {
-//                    stringBuilder.append(" ");
-//                }
-            }
-
-//            stringBuilder.append("\n");
+        if (this.showBorder) {
+            System.out.print(String.format("|\t %.2f \t|", val));
         }
-
-        System.out.print(stringBuilder);
+        else {
+            System.out.print(String.format("\t %.2f \t", val));
+        }
     }
 
 }

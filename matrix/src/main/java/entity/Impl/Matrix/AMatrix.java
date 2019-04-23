@@ -1,9 +1,6 @@
 package entity.Impl.Matrix;
 
-import entity.Interfaces.IMatrixFunction;
-import entity.Interfaces.IPrinter;
-import entity.Interfaces.IMatrix;
-import entity.Interfaces.IVector;
+import entity.Interfaces.*;
 
 public abstract class AMatrix implements IMatrix {
 
@@ -12,25 +9,29 @@ public abstract class AMatrix implements IMatrix {
 
     private final IVector vector;
 
-    public IMatrixFunction<IPrinter, IMatrix> iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
-        public void doAction(IPrinter printer, IMatrix matrix) {
-            printer.DrawBorder(matrix);
+    protected Boolean isPrintEmpty = true;
 
-            for (int i = 0; i < getRowsAmount(); i++) {
-                for (int j = 0; j < getColumnsAmount(); j++) {
-                    printer.DrawBorderCell(matrix, i, j);
-                    printer.DrawValue(matrix, i, j, getValue(i, j));
-                }
-            }
-
-            System.out.println();
-        }
-    };
+    protected IMatrixFunction<IPrinter, IMatrix> iMatrixFunction;
 
     protected AMatrix(IVector vector, int rows, int columns) {
         this.vector = vector;
         this.rows = rows;
         this.columns = columns;
+
+        iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
+            public void doAction(IPrinter printer, IMatrix matrix) {
+                printer.DrawBorder(matrix);
+                for (int i = 0; i < getRowsAmount(); i++) {
+                    for (int j = 0; j < getColumnsAmount(); j++) {
+                        if (getValue(i, j) == 0 && !isPrintEmpty) {
+                            continue;
+                        }
+                        printer.DrawValue(matrix, i, j, getValue(i, j));
+                    }
+                    printer.DrawEmptyRow();
+                }
+            }
+        };
     }
 
     public int getRowsAmount() {

@@ -22,4 +22,9 @@ public class HTMLPrinter implements IPrinter {
     public void DrawValue(IMatrix matrix, int row, int col, double val) {
         System.out.println(String.format("Painting the value=%s for cell (row = %s, col=%s) for matrix %s in html", val, row, col, matrix.getClass().getName()));
     }
+
+    public void DrawEmptyRow() {
+        System.out.println(String.format("Painting the empty row"));
+    }
+
 }

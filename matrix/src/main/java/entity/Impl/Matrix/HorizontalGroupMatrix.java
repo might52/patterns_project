@@ -16,17 +16,17 @@ public class HorizontalGroupMatrix implements IMatrix {
         return matrixes;
     }
 
-    private final IMatrixFunction iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
+    public final IMatrixFunction iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
         public void doAction(IPrinter printer, IMatrix matrix) {
             printer.DrawBorder(matrix);
             for (int i = 0; i < matrix.getRowsAmount(); i++) {
                 for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-//                    if (matrix.getValue(i, j) == 0) {
-//                        continue;
-//                    }
-                    printer.DrawBorderCell(matrix, i, j);
+                    if (matrix.getValue(i, j) == 0) {
+                        continue;
+                    }
                     printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
                 }
+                printer.DrawEmptyRow();
             }
         }
     };
@@ -43,7 +43,9 @@ public class HorizontalGroupMatrix implements IMatrix {
      */
     public HorizontalGroupMatrix(List<IMatrix> matrixes) {
         if (matrixes != null) {
-            this.matrixes.addAll(matrixes);
+            for (IMatrix matrix : matrixes) {
+                this.matrixes.add(matrix);
+            }
         }
     }
 
@@ -75,7 +77,6 @@ public class HorizontalGroupMatrix implements IMatrix {
         int colSumm = 0;
         for (IMatrix matrix : this.matrixes){
             colSumm += matrix.getColumnsAmount();
-//            System.out.println(String.format("\n colSumm: %s [row - %s, col - %s]", colSumm, row, col));
             if (col <= colSumm - 1) {
                 if (row > matrix.getRowsAmount() - 1) {
                     return 0;
@@ -83,7 +84,7 @@ public class HorizontalGroupMatrix implements IMatrix {
 
                 return matrix.getValue(row, colSumm - col - 1);
             }
-       }
+        }
 
         return -100;
     }
@@ -93,21 +94,10 @@ public class HorizontalGroupMatrix implements IMatrix {
         int colSumm = 0;
         for (IMatrix matrix : this.matrixes){
             colSumm += matrix.getColumnsAmount();
-//            System.out.println(String.format("\n colSumm: %s [row - %s, col - %s]", colSumm, row, col));
             if (col <= colSumm - 1) {
                 if (row > matrix.getRowsAmount() - 1) {
                     continue;
                 }
-
-//                System.out.println(
-//                        String.format(
-//                                "\nset value colSumm: %s [row - %s, col - %s, val - %s]",
-//                                colSumm,
-//                                row,
-//                                colSumm - col - 1,
-//                                value
-//                        )
-//                );
 
                 matrix.setValue(row, colSumm - col - 1, value);
                 break;
