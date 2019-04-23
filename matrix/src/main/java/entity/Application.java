@@ -14,7 +14,7 @@ public class Application {
 //        firstSecondThirdTasks();
         //test Reorder
 //        thirdTask();
-        fourthTask();
+//        fourthTask();
         fourthTaskLast();
     }
 
@@ -114,7 +114,7 @@ public class Application {
                         usualMatrix2
                 )
         );
-        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix1"));
+        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix1 for first line"));
         horizontalGroupMatrix1.print(new ConsolePrinter(true));
 
         IMatrix usualMatrix3 = new UsualMatrix(2, 4);
@@ -129,15 +129,19 @@ public class Application {
                         usualMatrix4
                 )
         );
-        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix2"));
+        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix2 for second line"));
         horizontalGroupMatrix2.print(new ConsolePrinter(true));
 
         IMatrix usualMatrix5 = new UsualMatrix(1,1);
         InitMatrix.fillMatrix(usualMatrix5, 1, 6);
         setValue(usualMatrix5, 6);
 
+        System.out.println(String.format("Using matrix = %s", "usualMatrix5 for third line"));
+        usualMatrix5.print(new ConsolePrinter(true));
+
+
         HorizontalGroupMatrix horizontalGroupMatrix = new HorizontalGroupMatrix(Arrays.asList(horizontalGroupMatrix1, horizontalGroupMatrix2, usualMatrix5));
-        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix"));
+        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix for whole matrixes"));
         horizontalGroupMatrix.print(new ConsolePrinter(true));
 
         ReorderDecorator reorderDecorator = new ReorderDecorator(horizontalGroupMatrix);
