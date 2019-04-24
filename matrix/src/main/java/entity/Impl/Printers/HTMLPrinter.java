@@ -6,6 +6,7 @@ import entity.Interfaces.IPrinter;
 public class HTMLPrinter implements IPrinter {
 
     private boolean showBorder = true;
+    private String nullSymbol = " - ";
 
     public HTMLPrinter(boolean showBorder){
         this.showBorder = showBorder;
@@ -19,12 +20,21 @@ public class HTMLPrinter implements IPrinter {
         System.out.println(String.format("Painting the cell (row = %s, col=%s) for matrix %s in html", row, col, matrix.getClass().getName()));
     }
 
-    public void DrawValue(IMatrix matrix, int row, int col, double val) {
+    public void DrawValue(IMatrix matrix, int row, int col, Double val) {
         System.out.println(String.format("Painting the value=%s for cell (row = %s, col=%s) for matrix %s in html", val, row, col, matrix.getClass().getName()));
     }
 
     public void DrawEmptyRow() {
         System.out.println(String.format("Painting the empty row"));
+    }
+
+    public String getNullSymbol() {
+        return nullSymbol;
+    }
+
+    @Override
+    public void setSymbolForNull(String symbol) {
+        this.nullSymbol = nullSymbol;
     }
 
 }

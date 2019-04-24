@@ -21,9 +21,6 @@ public class HorizontalGroupMatrix implements IMatrix {
             printer.DrawBorder(matrix);
             for (int i = 0; i < matrix.getRowsAmount(); i++) {
                 for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-                    if (matrix.getValue(i, j) == 0) {
-                        continue;
-                    }
                     printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
                 }
                 printer.DrawEmptyRow();
@@ -73,20 +70,20 @@ public class HorizontalGroupMatrix implements IMatrix {
     }
 
     @Override
-    public double getValue(int row, int col) {
+    public Double getValue(int row, int col) {
         int colSumm = 0;
         for (IMatrix matrix : this.matrixes){
             colSumm += matrix.getColumnsAmount();
             if (col <= colSumm - 1) {
                 if (row > matrix.getRowsAmount() - 1) {
-                    return 0;
+                    return null;
                 }
 
                 return matrix.getValue(row, colSumm - col - 1);
             }
         }
 
-        return -100;
+        return null;
     }
 
     @Override

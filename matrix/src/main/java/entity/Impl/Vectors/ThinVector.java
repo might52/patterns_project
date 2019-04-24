@@ -13,12 +13,12 @@ public class ThinVector implements IVector {
         this.someVector.put(component, value);
     }
 
-    public double getComponent(int component) {
+    public Double getComponent(int component) {
         if (this.someVector.keySet().contains(component)) {
             return this.someVector.get(component);
         }
 
-        return 0;
+        return null;
     }
 
     public int getVectorSize() {

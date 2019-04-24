@@ -23,9 +23,6 @@ public abstract class AMatrix implements IMatrix {
                 printer.DrawBorder(matrix);
                 for (int i = 0; i < getRowsAmount(); i++) {
                     for (int j = 0; j < getColumnsAmount(); j++) {
-                        if (getValue(i, j) == 0 && !isPrintEmpty) {
-                            continue;
-                        }
                         printer.DrawValue(matrix, i, j, getValue(i, j));
                     }
                     printer.DrawEmptyRow();
@@ -42,7 +39,7 @@ public abstract class AMatrix implements IMatrix {
         return this.columns;
     }
 
-    public double getValue(int row, int col) {
+    public Double getValue(int row, int col) {
         return vector.getComponent(row * this.getColumnsAmount() + col);
     }
 

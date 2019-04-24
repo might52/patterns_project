@@ -41,7 +41,7 @@ public class GroupVerticalDecorator implements IMatrix {
         return matrix.getRowsAmount();
     }
 
-    public double getValue(int row, int col) {
+    public Double getValue(int row, int col) {
         return matrix.getValue(col, row);
     }
 
@@ -52,5 +52,6 @@ public class GroupVerticalDecorator implements IMatrix {
     @Override
     public void print(IPrinter printer) {
         this.iMatrixFunction.doAction(printer, this);
+//        matrix.print(printer);
     }
 }

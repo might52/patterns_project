@@ -15,7 +15,7 @@ public class UsualVector implements IVector {
         }
     }
 
-    public double getComponent(int component) {
+    public Double getComponent(int component) {
         return this.someVector.get(component);
     }
 

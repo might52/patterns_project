@@ -35,9 +35,6 @@ public class ReorderDecorator implements IMatrix {
                 printer.DrawBorder(matrix);
                 for (int i = 0; i < matrix.getRowsAmount(); i++) {
                     for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-                        if (matrix.getValue(i, j) == 0){
-                            continue;
-                        }
                         printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
                     }
                     printer.DrawEmptyRow();
@@ -62,7 +59,7 @@ public class ReorderDecorator implements IMatrix {
         return matrix.getColumnsAmount();
     }
 
-    public double getValue(int row, int col) {
+    public Double getValue(int row, int col) {
         if (isRow){
             return matrix.getValue(col, row);
         }

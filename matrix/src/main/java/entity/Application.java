@@ -3,6 +3,7 @@ package entity;
 import entity.Impl.Matrix.*;
 import entity.Impl.Printers.ConsolePrinter;
 import entity.Interfaces.IMatrix;
+import entity.Interfaces.IPrinter;
 
 import java.util.Arrays;
 
@@ -127,15 +128,10 @@ public class Application {
         System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix for whole matrixes"));
         horizontalGroupMatrix.print(new ConsolePrinter());
 
-//        ReorderDecorator reorderDecorator = new ReorderDecorator(horizontalGroupMatrix);
-//        System.out.println(String.format("Using matrix = %s", "reorderDecorator"));
-//        reorderDecorator.print(new ConsolePrinter(true));
-//        System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix"));
-//        horizontalGroupMatrix.print(new ConsolePrinter());
-
         GroupVerticalDecorator groupVerticalDecorator = new GroupVerticalDecorator(horizontalGroupMatrix);
         System.out.println(String.format("Using matrix = %s", "groupVerticalDecorator"));
         groupVerticalDecorator.print(new ConsolePrinter());
+
     }
 }
 
