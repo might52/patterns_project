@@ -1,5 +1,6 @@
 package entity.Impl.Matrix;
 
+import com.sun.xml.internal.fastinfoset.stax.events.ReadIterator;
 import entity.Interfaces.IMatrix;
 import entity.Interfaces.IMatrixFunction;
 import entity.Interfaces.IPrinter;
@@ -24,7 +25,6 @@ public class ReorderDecorator implements IMatrix {
         shaker.add(shakedRow);
         shaker.add(shakedCol);
         Collections.shuffle(shaker);
-        isRow = true;
     }
 
     public ReorderDecorator(IMatrix matrix) {
@@ -33,9 +33,9 @@ public class ReorderDecorator implements IMatrix {
         this.iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
             public void doAction(IPrinter printer, IMatrix matrix) {
                 printer.DrawBorder(matrix);
-                for (int i = 0; i < matrix.getRowsAmount(); i++) {
-                    for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-                        printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
+                for (int i = 0; i < getRowsAmount(); i++) {
+                    for (int j = 0; j < getColumnsAmount(); j++) {
+                        printer.DrawValue(matrix, i, j, getValue(i, j));
                     }
                     printer.DrawEmptyRow();
                 }

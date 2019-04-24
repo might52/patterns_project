@@ -19,9 +19,9 @@ public class HorizontalGroupMatrix implements IMatrix {
     public final IMatrixFunction iMatrixFunction = new IMatrixFunction<IPrinter, IMatrix>() {
         public void doAction(IPrinter printer, IMatrix matrix) {
             printer.DrawBorder(matrix);
-            for (int i = 0; i < matrix.getRowsAmount(); i++) {
-                for (int j = 0; j < matrix.getColumnsAmount(); j++) {
-                    printer.DrawValue(matrix, i, j, matrix.getValue(i, j));
+            for (int i = 0; i < getRowsAmount(); i++) {
+                for (int j = 0; j < getColumnsAmount(); j++) {
+                    printer.DrawValue(matrix, i, j, getValue(i, j));
                 }
                 printer.DrawEmptyRow();
             }
@@ -71,19 +71,32 @@ public class HorizontalGroupMatrix implements IMatrix {
 
     @Override
     public Double getValue(int row, int col) {
-        int colSumm = 0;
-        for (IMatrix matrix : this.matrixes){
-            colSumm += matrix.getColumnsAmount();
-            if (col <= colSumm - 1) {
-                if (row > matrix.getRowsAmount() - 1) {
-                    return null;
-                }
-
-                return matrix.getValue(row, colSumm - col - 1);
+//        int colSumm = 0;
+//        for (IMatrix matrix : this.matrixes){
+//            colSumm += matrix.getColumnsAmount();
+//            if (col <= colSumm - 1) {
+//                if (row > matrix.getRowsAmount() - 1) {
+//                    return null;
+//                }
+//
+//                return matrix.getValue(row, colSumm - col - 1);
+//            }
+//        }
+//
+//        return null;
+        int locaIndex = 0;
+        int neededMatrix = 0;
+        for (int k = 0; k < matrixes.size(); k++) {
+            if (col < locaIndex + matrixes.get(k).getColumnsAmount()) {
+                neededMatrix = k;
+                break;
+            }
+            else {
+                locaIndex = locaIndex + matrixes.get(k).getColumnsAmount();
             }
         }
+        return matrixes.get(neededMatrix).getValue(row, col - locaIndex);
 
-        return null;
     }
 
     @Override
