@@ -1,5 +1,9 @@
 package entity;
 
+import entity.Impl.Command.CommandManager;
+import entity.Impl.Command.Impl.InitCommand;
+import entity.Impl.Command.Impl.SetValueCommand;
+import entity.Impl.Command.Interfaces.ICommand;
 import entity.Impl.Matrix.*;
 import entity.Impl.Printers.ConsolePrinter;
 import entity.Interfaces.IMatrix;
@@ -14,7 +18,22 @@ public class Application {
 //        thirdTask();
 //        fourthTask();
 //        fourthTaskLast();
-        fourchCheckAllcases();
+//        fourthCheck();
+        commandCheck();
+    }
+
+    private static void commandCheck() {
+        CommandManager commandManager = CommandManager.getInstance();
+        System.out.println(commandManager);
+        IMatrix usualMatrix = new UsualMatrix(2,2);
+        setValue(usualMatrix, 1);
+        usualMatrix.print(new ConsolePrinter());
+        ICommand first = new SetValueCommand(usualMatrix, commandManager, 1,1, 0.0);
+        new SetValueCommand(usualMatrix, commandManager, 0,0, 0.0).execute();
+        first.execute();
+        usualMatrix.print(new ConsolePrinter());
+        commandManager.undoLastCommand(first);
+        usualMatrix.print(new ConsolePrinter());
     }
 
     private static void firstSecondThirdTasks(){
@@ -127,26 +146,28 @@ public class Application {
         System.out.println(String.format("Using matrix = %s", "horizontalGroupMatrix for whole matrixes"));
         horizontalGroupMatrix.print(new ConsolePrinter());
 
+
+
         GroupVerticalDecorator groupVerticalDecorator = new GroupVerticalDecorator(horizontalGroupMatrix);
         System.out.println(String.format("Using matrix = %s", "groupVerticalDecorator"));
         groupVerticalDecorator.print(new ConsolePrinter());
 
     }
 
-    private static void fourchCheckAllcases() {
-        IPrinter printer = new ConsolePrinter(true);
-        IMatrix matrixReorder = new ThinMatrix(2,2);
-        setValue(matrixReorder, 1);
-        matrixReorder.setValue(0,1, 0);
-        matrixReorder.print(printer);
+    private static void fourthCheck(){
+        IPrinter printer = new ConsolePrinter();
+        IMatrix usualMatrix = new ThinMatrix(2,2);
+        setValue(usualMatrix, 1);
+        usualMatrix.setValue(0,1, 0);
+
+        usualMatrix.print(printer);
         printer.DrawEmptyRow();
 
-        ReorderDecorator reorderDecorator2 = new ReorderDecorator(matrixReorder);
-        reorderDecorator2.print(printer);
+        ReorderDecorator reorderDecorator = new ReorderDecorator(usualMatrix);
+        reorderDecorator.print(printer);
         printer.DrawEmptyRow();
-//        matrixReorder.print(new ConsolePrinter());
 
-        HorizontalGroupMatrix horizontalGroupMatrix3 = new HorizontalGroupMatrix(Arrays.asList(matrixReorder, reorderDecorator2));
+        HorizontalGroupMatrix horizontalGroupMatrix3 = new HorizontalGroupMatrix(Arrays.asList(usualMatrix, reorderDecorator));
         horizontalGroupMatrix3.print(printer);
     }
 }
