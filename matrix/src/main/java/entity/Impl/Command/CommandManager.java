@@ -38,7 +38,7 @@ public class CommandManager {
     public void undoLastCommand(ICommand command) {
         if (!commands.contains(command))
             throw new UnregisteredCommandException();
-        if(commands.isEmpty())
+        if (commands.isEmpty())
             return;
 
         locked.set(true);
