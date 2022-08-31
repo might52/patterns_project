@@ -1,10 +1,13 @@
 package entity;
 
 import entity.Impl.Command.CommandManager;
-import entity.Impl.Command.Impl.InitCommand;
 import entity.Impl.Command.Impl.SetValueCommand;
 import entity.Impl.Command.Interfaces.ICommand;
-import entity.Impl.Matrix.*;
+import entity.Impl.Matrix.GroupVerticalDecorator;
+import entity.Impl.Matrix.HorizontalGroupMatrix;
+import entity.Impl.Matrix.ReorderDecorator;
+import entity.Impl.Matrix.ThinMatrix;
+import entity.Impl.Matrix.UsualMatrix;
 import entity.Impl.Printers.ConsolePrinter;
 import entity.Interfaces.IMatrix;
 import entity.Interfaces.IPrinter;
@@ -29,7 +32,8 @@ public class Application {
         setValue(usualMatrix, 1);
         usualMatrix.print(new ConsolePrinter());
         ICommand first = new SetValueCommand(usualMatrix, commandManager, 1,1, 0.0);
-        new SetValueCommand(usualMatrix, commandManager, 0,0, 0.0).execute();
+        new SetValueCommand(usualMatrix, commandManager, 0, 0, 0.0).execute();
+        usualMatrix.print(new ConsolePrinter());
         first.execute();
         usualMatrix.print(new ConsolePrinter());
         commandManager.undoLastCommand(first);
